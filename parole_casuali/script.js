@@ -4,10 +4,10 @@ const nWords = 20;
 const apiUrl = 'https://flynn.boolean.careers/exercises/api/random/word';
 
 function injectSentence(words, domElement){
-    domElement.innerText = '';
     for (let i = 0; i < words.length; i++) {
         domElement.innerText += words[i];
     }
+    //to add the blank space between words
     domElement.innerText = domElement.innerText.split('.').join(' ');
 }
 
