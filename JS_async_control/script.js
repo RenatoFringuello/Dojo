@@ -1,4 +1,4 @@
-let id = Math.floor(Math.random() * 10);
+let id = Math.floor(Math.random() * 10) + 1;
 const baseUri = 'https://jsonplaceholder.typicode.com';
 let post, user;
 
@@ -32,5 +32,3 @@ async function getPostData(callback) {
                 callback()
             });
 }
-
-getPostData(getUserData);
