@@ -21,9 +21,11 @@ function getWord(){
     })
     .then(()=>{
         //display the list of words
-        // console.clear();
-        console.log(words);
-        injectSentence(words, sentenceDom);
+        if(words.length == nWords){
+            console.clear();
+            console.log(words);
+            injectSentence(words, sentenceDom);
+        }
     });
 }
 
