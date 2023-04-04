@@ -2,7 +2,7 @@ let id = Math.floor(Math.random() * 10);
 const baseUri = 'https://jsonplaceholder.typicode.com';
 let post, user;
 
-async function getuserData() {
+async function getUserData() {
 
     const userCall = await fetch(baseUri + `/users/${post.id}`)
     let userResponse = userCall.json();
@@ -17,7 +17,7 @@ async function getuserData() {
             });
 }
 
-async function getpostData() {
+async function getPostData(callback) {
 
     const postCall = await fetch(baseUri + `/posts/${id}`)
     let postResponse = postCall.json();
@@ -29,8 +29,8 @@ async function getpostData() {
             })
             .then(()=>{
                 console.log('post',post);
-                getuserData()
+                callback()
             });
 }
 
-getpostData();
+getPostData(getUserData);
