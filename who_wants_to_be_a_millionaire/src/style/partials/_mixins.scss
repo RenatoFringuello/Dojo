@@ -15,3 +15,33 @@
         scroll-snap-align: $snap-align;
     }
 }
+
+//millionaire box
+@mixin box($padding-y, $padding-x, $border-color:goldenrod){
+    position: relative;
+    color: white;
+    border: 5px solid $border-color;
+    border-left: 0;
+    border-right: 0;
+    padding: $padding-y $padding-x;
+    
+    &::after,
+    &::before{
+        content: '';
+        height: calc(100% / 1.41421 + 7px);
+        aspect-ratio: 1 / 1;
+        border: 5px solid $border-color;
+        border-top: 0;
+        border-left: 0;
+        position: absolute;
+        top:50%;
+    }
+    &::before{
+        right: calc(100%);
+        transform: translate(50%, -50%) rotate(135deg);
+    }
+    &::after{
+        right: 0;
+        transform: translate(50%, -50%) rotate(-45deg);
+    }
+}
