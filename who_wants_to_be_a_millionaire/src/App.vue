@@ -11,18 +11,15 @@ export default {
 </script>
 
 <template>
-  <main class="position-relative">
+  <main>
     <AppLogo />
     <AppQuestion />
   </main>
 </template>
 
 <style lang="scss">
-  @use './style/general.scss' as *;
-
   main{
-    background:#040444;
+    background:$main-color;
     min-height: 100vh;
   }
-
 </style>
