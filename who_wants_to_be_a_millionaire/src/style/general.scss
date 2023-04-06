@@ -1,2 +1,5 @@
 @use 'bootstrap/scss/bootstrap.scss' as *;
-@import './partials/mixins';
+
+.fs-small{
+    font-size: small;
+}
