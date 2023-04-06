@@ -18,6 +18,7 @@
 
 //millionaire box
 @mixin box($padding-y, $padding-x , $bg-color:#0000 ,$border-color:goldenrod){
+    cursor: pointer;
     position: relative;
     color: white;
     border: 5px solid $border-color;
@@ -29,8 +30,13 @@
     padding: $padding-y $padding-x;
     background-color: $bg-color;
     
+    &.answer:hover{
+        opacity: .7;
+    }
+
     &::after,
     &::before{
+        cursor: pointer;
         background: linear-gradient(-45deg, $main-dark-color, $main-dark-color 50%, #0000 50%);
         content: '';
         height: calc(100% / 1.41421 + 7px);
@@ -48,5 +54,16 @@
     &::after{
         right: 0;
         transform: translate(50%, -50%) rotate(-45deg);
+    }
+
+    &.correct,
+    &.correct::after,
+    &.correct::before{
+        border-color:$correct;
+    }
+    &.wrong,
+    &.wrong::after,
+    &.wrong::before{
+        border-color:$wrong;
     }
 }
