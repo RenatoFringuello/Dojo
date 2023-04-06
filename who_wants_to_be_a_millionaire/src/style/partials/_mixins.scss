@@ -17,16 +17,21 @@
 }
 
 //millionaire box
-@mixin box($padding-y, $padding-x, $border-color:goldenrod){
+@mixin box($padding-y, $padding-x , $bg-color:#0000 ,$border-color:goldenrod){
     position: relative;
     color: white;
     border: 5px solid $border-color;
     border-left: 0;
     border-right: 0;
+    @if $padding-x == 0 or $padding-x == '0px' or $padding-x == '0rem' or $padding-x == '0%' or $padding-x == '0em'{
+        $padding-x : 5px;
+    }
     padding: $padding-y $padding-x;
+    background-color: $bg-color;
     
     &::after,
     &::before{
+        background: linear-gradient(-45deg, $main-dark-color, $main-dark-color 50%, #0000 50%);
         content: '';
         height: calc(100% / 1.41421 + 7px);
         aspect-ratio: 1 / 1;
