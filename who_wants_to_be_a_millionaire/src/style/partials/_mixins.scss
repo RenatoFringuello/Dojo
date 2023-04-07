@@ -27,7 +27,7 @@
         background-color: $main-dark-color;
         height: 100%;
         width: 100%;
-        padding: 1rem ;
+        padding: $padding-y $padding-x;
     }
     
     &.answer{
@@ -36,11 +36,11 @@
         &:hover{
             opacity: 1;
         }
-        &.correct{
-            background-color: $correct;
-        }
-        &.wrong{
-            background-color: $wrong;
-        }
+    }
+    &.correct{
+        background-color: $correct;
+    }
+    &.wrong{
+        background-color: $wrong;
     }
 }

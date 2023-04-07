@@ -20,6 +20,6 @@ export default {
 
 <style lang="scss" scoped>
 .box{
-    @include box(.5rem, 0, goldenrod);
+    @include box(1rem, 1.5rem, goldenrod);
 }
 </style>
