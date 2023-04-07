@@ -6,7 +6,6 @@ export default {
     components: { AppBox },
     data() {
         return {
-            userAnswer:'',
             questionIndex:0,
             score:{
                 asked:0,
@@ -76,10 +75,27 @@ export default {
                         },
                     ],
                 }
-            ]
+            ],
+            questionsAsked:[],
         }
     },
     methods: {
+        nextQuestion(answs, selected){
+            //after 3 sec reset all boxes and give me another question or score
+            setTimeout(()=>{
+                // resret boxes
+                answs.forEach((answ,i) => {
+                    if(this.questions.at(this.questionIndex).answers.at(i).class == 'correct' || i == selected){
+                        answ.className = answ.className.replace(this.questions.at(this.questionIndex).answers.at(i).class, '');
+                    }
+                });
+                // remove the question asked and save that
+                this.questionsAsked.push(this.questions[this.questionIndex]);
+                this.questions.splice(this.questionIndex, 1);
+                // set another question
+                this.questionIndex = Math.floor(Math.random() * this.questions.length);
+            }, 3000);
+        },
         showAnswers(selected){
             //get the answers box
             const answs = document.querySelectorAll('.answer');
@@ -94,23 +110,23 @@ export default {
             // increment the n of question asked
             this.score.asked ++;
 
-            //after 3 sec reset all boxes and give me another question
-            setTimeout(()=>{
-                //resret boxes
-                answs.forEach((answ,i) => {
-                    if(this.questions.at(this.questionIndex).answers.at(i).class == 'correct' || i == selected){
-                        answ.className = answ.className.replace(this.questions.at(this.questionIndex).answers.at(i).class, '');
-                    }
-                });
-                // set next question, different than that already asked
-                let oldIndex;
-                do {
-                    oldIndex = this.questionIndex;
-                    this.questionIndex = Math.floor(Math.random() * this.questions.length);
-                } while (this.questionIndex == oldIndex);
-            }, 3000);
-        }
+            this.nextQuestion(answs, selected);
+        },
+        newGame(isRestart = 1){
+            if(isRestart){
+                this.questions = this.questionsAsked;
+                this.questionsAsked = [];
+            }
+            this.questionIndex = Math.floor(Math.random() * this.questions.length);
+            this.score = {
+                asked:0,
+                correct:0,
+            };
+        },
     },
+    created(){
+        this.newGame(0);
+    }
 }
 </script>
 
@@ -118,18 +134,26 @@ export default {
     <section>
         <div class="container">
             <div class="wrapper d-flex flex-column">
-                <div class="m-auto mb-5">
-                    <div class="score-box mb-3">
-                        <div class="row">
-                            <div class="col-6">
+                <div class="m-auto" :class="(questions.length != 0)? 'mb-5' : ''">
+                    <div class="score-box" v-if="questions.length == 0">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <h1 class="mb-0 text-center">
+                                    This is your score
+                                </h1>
+                            </div>
+                            <div class="col-12">
                                 <AppBox :content="'Asked: '+score.asked" class="mb-3"/>
                             </div>
-                            <div class="col-6">
+                            <div class="col-12">
                                 <AppBox :content="'Score: '+score.correct" className="correct"/>
+                            </div>
+                            <div class="col-12">
+                                <AppBox :content="'Restart'" className="answer" @click="newGame()"/>
                             </div>
                         </div>
                     </div>
-                    <div class="question-box pt-2">
+                    <div class="question-box pt-2" v-if="questions.length != 0">
                         <div class="row g-4">
                             <div class="col-12">
                                 <AppBox :content="questions[questionIndex].question"/>
