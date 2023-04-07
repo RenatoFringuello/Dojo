@@ -3,20 +3,23 @@ export default {
     name:'AppBox',
     props:{
         content:String,
+        className:String,
     }
 }
 </script>
 
 <template>
-    <div class="wrapper px-4">
-        <div class="box fs-small">
-            {{ content }}
+    <div class="wrapper h-100">
+        <div class="box fs-small h-100 " :class="className">
+            <div class="content d-flex align-items-center">
+                {{ content }}
+            </div>
         </div>
     </div>
 </template>
 
 <style lang="scss" scoped>
-    .box{
-        @include box(1rem, 0, $main-dark-color);
-    }
+.box{
+    @include box(.5rem, 0, goldenrod);
+}
 </style>
