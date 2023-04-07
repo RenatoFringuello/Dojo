@@ -39,7 +39,7 @@
         cursor: pointer;
         background: linear-gradient(-45deg, $main-dark-color, $main-dark-color 50%, #0000 50%);
         content: '';
-        height: calc(100% / 1.41421 + 7px);
+        height: calc(100% / 1.41421 + 5px);
         aspect-ratio: 1 / 1;
         border: 5px solid $border-color;
         border-top: 0;
