@@ -17,53 +17,30 @@
 }
 
 //millionaire box
-@mixin box($padding-y, $padding-x , $bg-color:#0000 ,$border-color:goldenrod){
-    cursor: pointer;
-    position: relative;
-    color: white;
-    border: 5px solid $border-color;
-    border-left: 0;
-    border-right: 0;
-    @if $padding-x == 0 or $padding-x == '0px' or $padding-x == '0rem' or $padding-x == '0%' or $padding-x == '0em'{
-        $padding-x : 5px;
-    }
-    padding: $padding-y $padding-x;
-    background-color: $bg-color;
+@mixin box($padding-y, $padding-x ,$border-color:goldenrod){
+    clip-path: polygon(calc(0% + $dist) 0, calc(100% - $dist) 0, 100% 50%, calc(100% - $dist) 98%, calc(0% + $dist) 100%, 0% 50%);
+    background-color: $border-color;
+    opacity: .85;
     
-    &.answer:hover{
-        opacity: .7;
+    .content{
+        clip-path: polygon(calc(0% + $dist + ($weight / 2)) $weight, calc(100% - $dist - ($weight / 2)) $weight, calc(100% - $weight) 50%, calc(100% - $dist - ($weight / 2)) calc(98% - $weight), calc(0% + $dist + ($weight / 2)) calc(100% - $weight), $weight 50%);
+        background-color: $main-dark-color;
+        height: 100%;
+        width: 100%;
+        padding: 1rem ;
     }
-
-    &::after,
-    &::before{
+    
+    &.answer{
         cursor: pointer;
-        background: linear-gradient(-45deg, $main-dark-color, $main-dark-color 50%, #0000 50%);
-        content: '';
-        height: calc(100% / 1.41421 + 5px);
-        aspect-ratio: 1 / 1;
-        border: 5px solid $border-color;
-        border-top: 0;
-        border-left: 0;
-        position: absolute;
-        top:50%;
-    }
-    &::before{
-        right: calc(100%);
-        transform: translate(50%, -50%) rotate(135deg);
-    }
-    &::after{
-        right: 0;
-        transform: translate(50%, -50%) rotate(-45deg);
-    }
 
-    &.correct,
-    &.correct::after,
-    &.correct::before{
-        border-color:$correct;
-    }
-    &.wrong,
-    &.wrong::after,
-    &.wrong::before{
-        border-color:$wrong;
+        &:hover{
+            opacity: 1;
+        }
+        &.correct{
+            background-color: $correct;
+        }
+        &.wrong{
+            background-color: $wrong;
+        }
     }
 }
