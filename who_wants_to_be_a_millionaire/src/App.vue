@@ -6,14 +6,19 @@ export default {
   components: {
     AppQuestion,
     AppLogo,
-  }
+  },
+  data() {
+    return {
+      
+    }
+  },
 }
 </script>
 
 <template>
-  <main>
+  <main class="position-relative">
     <AppLogo />
-    <AppQuestion />
+    <AppQuestion class="position-absolute top-0 start-0 w-100" />
   </main>
 </template>
 
